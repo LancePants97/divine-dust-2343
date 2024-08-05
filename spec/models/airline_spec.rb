@@ -13,14 +13,14 @@ RSpec.describe Airline, type: :model do
     @airline4 = Airline.create!(name: "Delta")
     @airline5 = Airline.create!(name: "JetBlue")
 
-    @flight1 = Flight.create!(number: "1234", date: "08/05/24", airline_id: @airline1.id) # 3 passengers
-    @flight2 = Flight.create!(number: "4321", date: "08/06/24", airline_id: @airline1.id) # 2 passengers
-    @flight3 = Flight.create!(number: "9876", date: "08/05/24", airline_id: @airline2.id) # 1 passenger
-    @flight4 = Flight.create!(number: "6789", date: "08/07/24", airline_id: @airline2.id) # 3 passengers
-    @flight5 = Flight.create!(number: "4567", date: "08/05/24", airline_id: @airline3.id) # 2 passengers
-    @flight6 = Flight.create!(number: "7654", date: "08/06/24", airline_id: @airline3.id) # 1 passenger
-    @flight7 = Flight.create!(number: "1928", date: "08/08/24", airline_id: @airline4.id) # 0 passengers
-    @flight8 = Flight.create!(number: "9283", date: "08/10/24", airline_id: @airline4.id) # 0 passengers
+    @flight1 = Flight.create!(number: "1234", date: "08/05/24", departure_city: "Denver", arrival_city: "Reno", airline_id: @airline1.id) # 3 passengers
+    @flight2 = Flight.create!(number: "4321", date: "08/06/24", departure_city: "Newark", arrival_city: "San Franciso", airline_id: @airline1.id) # 2 passengers
+    @flight3 = Flight.create!(number: "9876", date: "08/05/24", departure_city: "NYC", arrival_city: "Kansas City", airline_id: @airline2.id) # 1 passenger
+    @flight4 = Flight.create!(number: "6789", date: "08/07/24", departure_city: "Berlin", arrival_city: "Tokyo", airline_id: @airline2.id) # 3 passengers
+    @flight5 = Flight.create!(number: "4567", date: "08/05/24", departure_city: "Charlotte", arrival_city: "London", airline_id: @airline3.id) # 2 passengers
+    @flight6 = Flight.create!(number: "7654", date: "08/06/24", departure_city: "Las Vegas", arrival_city: "Beijin", airline_id: @airline3.id) # 1 passenger
+    @flight7 = Flight.create!(number: "1928", date: "08/08/24", departure_city: "Las Angeles", arrival_city: "Honolulu", airline_id: @airline4.id) # 0 passengers
+    @flight8 = Flight.create!(number: "9283", date: "08/10/24", departure_city: "Jacksonville", arrival_city: "Chicago", airline_id: @airline4.id) # 0 passengers
 
     @passenger1 = Passenger.create!(name: "Shaggy", age: 17) # on 2 flights
     @passenger2 = Passenger.create!(name: "Fred", age: 21) # on 2 flights
