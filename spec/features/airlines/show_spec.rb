@@ -29,20 +29,23 @@ RSpec.describe "airline show page" do
     PassengerFlight.create!(passenger_id: @passenger2.id, flight_id: @flight1.id)
     PassengerFlight.create!(passenger_id: @passenger3.id, flight_id: @flight1.id)
 
-    PassengerFlight.create!(passenger_id: @passenger1.id, flight_id: @flight2.id)
+    PassengerFlight.create!(passenger_id: @passenger3.id, flight_id: @flight2.id)
     PassengerFlight.create!(passenger_id: @passenger4.id, flight_id: @flight2.id)
+    PassengerFlight.create!(passenger_id: @passenger6.id, flight_id: @flight2.id)
 
-    PassengerFlight.create!(passenger_id: @passenger6.id, flight_id: @flight3.id)
+    PassengerFlight.create!(passenger_id: @passenger4.id, flight_id: @flight3.id)
+    PassengerFlight.create!(passenger_id: @passenger2.id, flight_id: @flight3.id)
 
+    PassengerFlight.create!(passenger_id: @passenger2.id, flight_id: @flight4.id)
     PassengerFlight.create!(passenger_id: @passenger4.id, flight_id: @flight4.id)
     PassengerFlight.create!(passenger_id: @passenger5.id, flight_id: @flight4.id)
-    PassengerFlight.create!(passenger_id: @passenger6.id, flight_id: @flight4.id)
 
     PassengerFlight.create!(passenger_id: @passenger2.id, flight_id: @flight5.id)
     PassengerFlight.create!(passenger_id: @passenger6.id, flight_id: @flight5.id)
 
     PassengerFlight.create!(passenger_id: @passenger6.id, flight_id: @flight6.id)
   end
+
   describe "as a visitor, when I visit the airline's show page" do
     it "displays a unique list of all adult passengers on this airline" do
       visit airline_path(@airline1)
@@ -50,6 +53,9 @@ RSpec.describe "airline show page" do
       expect(page).to have_content(@passenger2.name, count: 1)
       expect(page).to have_content(@passenger3.name, count: 1)
       expect(page).to have_content(@passenger4.name, count: 1)
+
+      expect(@passenger3.name).to appear_before(@passenger2.name)
+      expect(@passenger2.name).to appear_before(@passenger4.name)
 
       expect(page).to_not have_content(@passenger1.name)
       expect(page).to_not have_content(@passenger5.name)
@@ -60,22 +66,36 @@ RSpec.describe "airline show page" do
     it "displays a unique list of all adult passengers on this airline" do
       visit airline_path(@airline2)
 
+      expect(page).to have_content(@passenger2.name, count: 1)
       expect(page).to have_content(@passenger4.name, count: 1)
 
+      expect(@passenger2.name).to appear_before(@passenger4.name)
+      
       expect(page).to_not have_content(@passenger1.name)
-      expect(page).to_not have_content(@passenger2.name)
       expect(page).to_not have_content(@passenger3.name)
       expect(page).to_not have_content(@passenger5.name)
       expect(page).to_not have_content(@passenger6.name)
       expect(page).to_not have_content(@passenger7.name)
     end
 
-    it "displays a unique list of all adult passengers on this airline" do
+    it "displays a unique list of all adult passengers on this airline sorted by how many flights a passenger has taken with them" do
       visit airline_path(@airline3)
 
       expect(page).to have_content(@passenger2.name, count: 1)
 
       expect(page).to_not have_content(@passenger1.name)
+      expect(page).to_not have_content(@passenger3.name)
+      expect(page).to_not have_content(@passenger4.name)
+      expect(page).to_not have_content(@passenger5.name)
+      expect(page).to_not have_content(@passenger6.name)
+      expect(page).to_not have_content(@passenger7.name)
+    end
+
+    it "displays a unique list of all adult passengers on this airline" do
+      visit airline_path(@airline4)
+
+      expect(page).to_not have_content(@passenger1.name)
+      expect(page).to_not have_content(@passenger2.name)
       expect(page).to_not have_content(@passenger3.name)
       expect(page).to_not have_content(@passenger4.name)
       expect(page).to_not have_content(@passenger5.name)

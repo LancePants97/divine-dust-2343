@@ -34,14 +34,16 @@ RSpec.describe Airline, type: :model do
     PassengerFlight.create!(passenger_id: @passenger2.id, flight_id: @flight1.id)
     PassengerFlight.create!(passenger_id: @passenger3.id, flight_id: @flight1.id)
 
-    PassengerFlight.create!(passenger_id: @passenger1.id, flight_id: @flight2.id)
+    PassengerFlight.create!(passenger_id: @passenger3.id, flight_id: @flight2.id)
     PassengerFlight.create!(passenger_id: @passenger4.id, flight_id: @flight2.id)
+    PassengerFlight.create!(passenger_id: @passenger6.id, flight_id: @flight2.id)
 
-    PassengerFlight.create!(passenger_id: @passenger6.id, flight_id: @flight3.id)
+    PassengerFlight.create!(passenger_id: @passenger4.id, flight_id: @flight3.id)
+    PassengerFlight.create!(passenger_id: @passenger2.id, flight_id: @flight3.id)
 
+    PassengerFlight.create!(passenger_id: @passenger2.id, flight_id: @flight4.id)
     PassengerFlight.create!(passenger_id: @passenger4.id, flight_id: @flight4.id)
     PassengerFlight.create!(passenger_id: @passenger5.id, flight_id: @flight4.id)
-    PassengerFlight.create!(passenger_id: @passenger6.id, flight_id: @flight4.id)
 
     PassengerFlight.create!(passenger_id: @passenger2.id, flight_id: @flight5.id)
     PassengerFlight.create!(passenger_id: @passenger6.id, flight_id: @flight5.id)
@@ -51,8 +53,8 @@ RSpec.describe Airline, type: :model do
 
   describe "instance methods" do
     it "adult_passengers" do
-      expect(@airline1.adult_passengers).to eq([@passenger2, @passenger3, @passenger4])
-      expect(@airline2.adult_passengers).to eq([@passenger4])
+      expect(@airline1.adult_passengers).to eq([@passenger3,@passenger2, @passenger4])
+      expect(@airline2.adult_passengers).to eq([@passenger2, @passenger4])
       expect(@airline3.adult_passengers).to eq([@passenger2])
       expect(@airline4.adult_passengers).to eq([])
     end
