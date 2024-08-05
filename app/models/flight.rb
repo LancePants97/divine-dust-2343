@@ -4,6 +4,6 @@ class Flight < ApplicationRecord
   has_many :passengers, through: :passenger_flights
 
   def airline_name
-    self.airline.name
+    airline.name
   end
 end
