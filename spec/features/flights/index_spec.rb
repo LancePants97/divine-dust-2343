@@ -155,25 +155,50 @@ RSpec.describe "flights index page" do
       end
     end
 
-    it "has a button to remove a passenger from a singular flight" do
+    it "has a functional button to remove a passenger from a singular flight" do
       visit flights_path
 
       within("#flight-#{@flight3.id}") do
         expect(page).to have_content(@passenger6.name)
+
+        within("#passenger-#{@passenger6.id}") do
+          expect(page).to have_button("Remove From Flight")
+        end
       end
 
       within("#flight-#{@flight5.id}") do
+        expect(page).to have_content(@passenger2.name)
         expect(page).to have_content(@passenger6.name)
+
+        within("#passenger-#{@passenger2.id}") do
+          expect(page).to have_button("Remove From Flight")
+        end
+
+        within("#passenger-#{@passenger6.id}") do
+          expect(page).to have_button("Remove From Flight")
+        end
       end
 
       within("#flight-#{@flight6.id}") do
         expect(page).to have_content(@passenger6.name)
+
+        within("#passenger-#{@passenger6.id}") do
+          expect(page).to have_button("Remove From Flight")
+        end
       end
 
       within("#flight-#{@flight4.id}") do
         expect(page).to have_content(@passenger4.name)
         expect(page).to have_content(@passenger5.name)
         expect(page).to have_content(@passenger6.name)
+
+        within("#passenger-#{@passenger4.id}") do
+          expect(page).to have_button("Remove From Flight")
+        end
+
+        within("#passenger-#{@passenger5.id}") do
+          expect(page).to have_button("Remove From Flight")
+        end
 
         within("#passenger-#{@passenger6.id}") do
           click_button "Remove From Flight"
@@ -186,14 +211,26 @@ RSpec.describe "flights index page" do
 
       within("#flight-#{@flight3.id}") do
         expect(page).to have_content(@passenger6.name)
+
+        within("#passenger-#{@passenger6.id}") do
+          expect(page).to have_button("Remove From Flight")
+        end
       end
 
       within("#flight-#{@flight5.id}") do
         expect(page).to have_content(@passenger6.name)
+
+        within("#passenger-#{@passenger6.id}") do
+          expect(page).to have_button("Remove From Flight")
+        end
       end
 
       within("#flight-#{@flight6.id}") do
         expect(page).to have_content(@passenger6.name)
+
+        within("#passenger-#{@passenger6.id}") do
+          expect(page).to have_button("Remove From Flight")
+        end
       end
     end
   end
