@@ -47,6 +47,112 @@ RSpec.describe "flights index page" do
   describe "as a visitor, when I visit the flights index page" do
     it "displays a list of all flight numbers, their airlines, and all passengers on that flight" do
       visit flights_path
+      
+      within("#flights") do
+        expect(page).to have_content("Flight Number: #{@flight1.number}")
+        expect(page).to have_content("Flight Number: #{@flight2.number}")
+        expect(page).to have_content("Flight Number: #{@flight3.number}")
+        expect(page).to have_content("Flight Number: #{@flight4.number}")
+        expect(page).to have_content("Flight Number: #{@flight5.number}")
+        expect(page).to have_content("Flight Number: #{@flight6.number}")
+        expect(page).to have_content("Flight Number: #{@flight7.number}")
+        expect(page).to have_content("Flight Number: #{@flight8.number}")
+      end
+
+      within("#flight-#{@flight1.id}") do
+        expect(page).to have_content("Flight Airline: #{@airline1.name}")
+        expect(page).to have_content(@passenger1.name)
+        expect(page).to have_content(@passenger2.name)
+        expect(page).to have_content(@passenger3.name)
+
+        expect(page).to_not have_content(@passenger4.name)
+        expect(page).to_not have_content(@passenger5.name)
+        expect(page).to_not have_content(@passenger6.name)
+        expect(page).to_not have_content(@passenger7.name)
+      end
+
+      within("#flight-#{@flight2.id}") do
+        expect(page).to have_content("Flight Airline: #{@airline1.name}")
+        expect(page).to have_content(@passenger1.name)
+        expect(page).to have_content(@passenger4.name)
+
+        expect(page).to_not have_content(@passenger3.name)
+        expect(page).to_not have_content(@passenger5.name)
+        expect(page).to_not have_content(@passenger6.name)
+        expect(page).to_not have_content(@passenger7.name)
+      end
+
+      within("#flight-#{@flight3.id}") do
+        expect(page).to have_content("Flight Airline: #{@airline2.name}")
+        expect(page).to have_content(@passenger6.name)
+
+        expect(page).to_not have_content(@passenger1.name)
+        expect(page).to_not have_content(@passenger2.name)
+        expect(page).to_not have_content(@passenger3.name)
+        expect(page).to_not have_content(@passenger4.name)
+        expect(page).to_not have_content(@passenger5.name)
+        expect(page).to_not have_content(@passenger7.name)
+      end
+
+      within("#flight-#{@flight4.id}") do
+        expect(page).to have_content("Flight Airline: #{@airline2.name}")
+        expect(page).to have_content(@passenger4.name)
+        expect(page).to have_content(@passenger5.name)
+        expect(page).to have_content(@passenger6.name)
+
+        expect(page).to_not have_content(@passenger1.name)
+        expect(page).to_not have_content(@passenger2.name)
+        expect(page).to_not have_content(@passenger3.name)
+        expect(page).to_not have_content(@passenger7.name)
+      end
+
+      within("#flight-#{@flight5.id}") do
+        expect(page).to have_content("Flight Airline: #{@airline3.name}")
+        expect(page).to have_content(@passenger2.name)
+        expect(page).to have_content(@passenger6.name)
+
+        expect(page).to_not have_content(@passenger1.name)
+        expect(page).to_not have_content(@passenger3.name)
+        expect(page).to_not have_content(@passenger4.name)
+        expect(page).to_not have_content(@passenger5.name)
+        expect(page).to_not have_content(@passenger7.name)
+      end
+
+      within("#flight-#{@flight6.id}") do
+        expect(page).to have_content("Flight Airline: #{@airline3.name}")
+        expect(page).to have_content(@passenger6.name)
+
+        expect(page).to_not have_content(@passenger1.name)
+        expect(page).to_not have_content(@passenger2.name)
+        expect(page).to_not have_content(@passenger3.name)
+        expect(page).to_not have_content(@passenger4.name)
+        expect(page).to_not have_content(@passenger5.name)
+        expect(page).to_not have_content(@passenger7.name)
+      end
+
+      within("#flight-#{@flight7.id}") do
+        expect(page).to have_content("Flight Airline: #{@airline4.name}")
+
+        expect(page).to_not have_content(@passenger1.name)
+        expect(page).to_not have_content(@passenger2.name)
+        expect(page).to_not have_content(@passenger3.name)
+        expect(page).to_not have_content(@passenger4.name)
+        expect(page).to_not have_content(@passenger5.name)
+        expect(page).to_not have_content(@passenger6.name)
+        expect(page).to_not have_content(@passenger7.name)
+      end
+
+      within("#flight-#{@flight8.id}") do
+        expect(page).to have_content("Flight Airline: #{@airline4.name}")
+
+        expect(page).to_not have_content(@passenger1.name)
+        expect(page).to_not have_content(@passenger2.name)
+        expect(page).to_not have_content(@passenger3.name)
+        expect(page).to_not have_content(@passenger4.name)
+        expect(page).to_not have_content(@passenger5.name)
+        expect(page).to_not have_content(@passenger6.name)
+        expect(page).to_not have_content(@passenger7.name)
+      end
     end
   end
 end
