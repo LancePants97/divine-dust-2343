@@ -1,11 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Airline, type: :model do
-  describe "relationships" do
-    it { should have_many :flights }
-    it { should have_many(:passengers).through(:flights)}
-  end
-
+RSpec.describe "airline show page" do
   before(:each) do
     @airline1 = Airline.create!(name: "United")
     @airline2 = Airline.create!(name: "Spirit")
@@ -48,13 +43,44 @@ RSpec.describe Airline, type: :model do
 
     PassengerFlight.create!(passenger_id: @passenger6.id, flight_id: @flight6.id)
   end
+  describe "as a visitor, when I visit the airline's show page" do
+    it "displays a unique list of all adult passengers on this airline" do
+      visit airline_path(@airline1)
 
-  describe "instance methods" do
-    it "adult_passengers" do
-      expect(@airline1.adult_passengers).to eq([@passenger2, @passenger3, @passenger4])
-      expect(@airline2.adult_passengers).to eq([@passenger4])
-      expect(@airline3.adult_passengers).to eq([@passenger2])
-      expect(@airline4.adult_passengers).to eq([])
+      expect(page).to have_content(@passenger2.name, count: 1)
+      expect(page).to have_content(@passenger3.name, count: 1)
+      expect(page).to have_content(@passenger4.name, count: 1)
+
+      expect(page).to_not have_content(@passenger1.name)
+      expect(page).to_not have_content(@passenger5.name)
+      expect(page).to_not have_content(@passenger6.name)
+      expect(page).to_not have_content(@passenger7.name)
+    end
+
+    it "displays a unique list of all adult passengers on this airline" do
+      visit airline_path(@airline2)
+
+      expect(page).to have_content(@passenger4.name, count: 1)
+
+      expect(page).to_not have_content(@passenger1.name)
+      expect(page).to_not have_content(@passenger2.name)
+      expect(page).to_not have_content(@passenger3.name)
+      expect(page).to_not have_content(@passenger5.name)
+      expect(page).to_not have_content(@passenger6.name)
+      expect(page).to_not have_content(@passenger7.name)
+    end
+
+    it "displays a unique list of all adult passengers on this airline" do
+      visit airline_path(@airline3)
+
+      expect(page).to have_content(@passenger2.name, count: 1)
+
+      expect(page).to_not have_content(@passenger1.name)
+      expect(page).to_not have_content(@passenger3.name)
+      expect(page).to_not have_content(@passenger4.name)
+      expect(page).to_not have_content(@passenger5.name)
+      expect(page).to_not have_content(@passenger6.name)
+      expect(page).to_not have_content(@passenger7.name)
     end
   end
 end
